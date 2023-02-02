@@ -23,7 +23,7 @@ exports.getTenant = catchAsync(async (req, res, next) => {
 exports.getMe = handlerFactory.getMe(Tenant);
 
 // Update Profile
-// Update User Profile ==> /api/v1/users/updateMe
+// Update Tenant Profile ==> /api/v1/users/updateMe
 exports.updateMe = catchAsync(async (req, res, next) => {
 	if (req.body.password) {
 		return next(
@@ -35,11 +35,11 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 	}
 
 	if (req.body.role) {
-		return next(new AppError("User cannot edit role", 400));
+		return next(new AppError("Tenant cannot edit role", 400));
 	}
 
-	const newUserData = req.body;
-	// User Profile Photo
+	const newTenantData = req.body;
+	// Tenant Profile Photo
 	if (req?.body?.photo !== "" && req?.body?.photo !== undefined) {
 		console.log("Hello");
 		// Update new photo
@@ -59,46 +59,27 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 			crop: "scale",
 		});
 
-		newUserData.photo = {
+		newTenantData.photo = {
 			public_id: result.public_id,
 			url: result.secure_url,
 		};
 	}
 
-	if (req.body.photo === "") delete newUserData.photo;
+	if (req.body.photo === "") delete newTenantData.photo;
 
-	// User Certifications
-	// TODO: Multiple images updates
-	if (req?.body?.certificates) {
-		// console.log(req.body.certificates);
-		const certifications = req.body.certificates;
-
-		for (let i = 0; i < certifications.length; i++) {
-			const result = await cloudinary.v2.uploader.upload(
-				certifications[i],
-				{
-					folder: process.env.CLOUDINARY_USER_CERTIFICATES,
-				}
-			);
-
-			certifications[i] = {
-				public_id: result.public_id,
-				url: result.secure_url,
-			};
+	const updatedTenant = await Tenant.findByIdAndUpdate(
+		req.user.id,
+		newTenantData,
+		{
+			new: true,
+			runValidators: true,
 		}
-
-		newUserData.certifications = certifications;
-	}
-
-	const updatedUser = await User.findByIdAndUpdate(req.user.id, newUserData, {
-		new: true,
-		runValidators: true,
-	});
+	);
 
 	res.status(200).json({
 		success: true,
 		data: {
-			user: updatedUser,
+			user: updatedTenant,
 		},
 	});
 });

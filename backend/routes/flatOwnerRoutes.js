@@ -7,13 +7,12 @@ const FlatOwner = require("../models/flatOwnerModel");
 
 const router = express.Router();
 
-router.post("/signup", authController.signupRecruiter);
-router.post("/login", authController.loginRecruiter);
-router.get("/login", authController.loginRecruiter);
+router.post("/signup", authController.signupFlatOwner);
+router.post("/login", authController.loginFlatOwner);
 router.get("/logout", handlerFactory.logout);
 
-router.post("/forgotPassword", authController.forgotPasswordRecruiter);
-router.patch("/resetPassword/:token", authController.resetPasswordRecruiter);
+router.post("/forgotPassword", authController.forgotPasswordFlatOwner);
+router.patch("/resetPassword/:token", authController.resetPasswordFlatOwner);
 
 router.route("/me").get(protect(FlatOwner), flatOwnerController.getMe);
 router

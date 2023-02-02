@@ -7,12 +7,12 @@ const Tenant = require("../models/tenantModel");
 
 const router = express.Router();
 
-router.post("/signup", authController.signupUser);
-router.post("/login", authController.loginUser);
+router.post("/signup", authController.signupTenant);
+router.post("/login", authController.loginTenant);
 router.get("/logout", handlerFactory.logout);
 
-router.post("/forgotPassword", authController.forgotPasswordUser);
-router.patch("/resetPassword/:token", authController.resetPasswordUser);
+router.post("/forgotPassword", authController.forgotPasswordTenant);
+router.patch("/resetPassword/:token", authController.resetPasswordTenant);
 
 router.get("/me", protect(Tenant), tenantController.getMe);
 

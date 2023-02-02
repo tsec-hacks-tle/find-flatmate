@@ -1,30 +1,30 @@
-const User = require("../models/tenantModel");
-const Recruiter = require("../models/flatOwnerModel");
+const Tenant = require("../models/tenantModel");
+const FlatOwner = require("../models/flatOwnerModel");
 const handlerFactory = require("./handlerFactory");
 
 /***********SIGNUP**********/
-// POST -> /api/v1/users/signup
-exports.signupUser = handlerFactory.signup(User);
-// POST -> /api/v1/recruiter/signup
-exports.signupRecruiter = handlerFactory.signup(Recruiter);
+// POST -> /api/v1/tenants/signup
+exports.signupTenant = handlerFactory.signup(Tenant);
+// POST -> /api/v1/flatOwners/signup
+exports.signupFlatOwner = handlerFactory.signup(FlatOwner);
 
 /***********LOGIN**********/
-// POST -> /api/v1/users/login
-exports.loginUser = handlerFactory.login(User);
-// POST -> /api/v1/recruiter/login
-exports.loginRecruiter = handlerFactory.login(Recruiter);
+// POST -> /api/v1/tenants/login
+exports.loginTenant = handlerFactory.login(Tenant);
+// POST -> /api/v1/flatOwners/login
+exports.loginFlatOwner = handlerFactory.login(FlatOwner);
 
 /***********FORGOT PASSWORD**********/
-// POST -> /api/v1/users/forgotPassword
-exports.forgotPasswordUser = handlerFactory.forgotPassword(User, "tenant");
-// POST -> /api/v1/recruiter/forgotPassword
-exports.forgotPasswordRecruiter = handlerFactory.forgotPassword(
-	Recruiter,
+// POST -> /api/v1/tenants/forgotPassword
+exports.forgotPasswordTenant = handlerFactory.forgotPassword(Tenant, "tenant");
+// POST -> /api/v1/flatOwners/forgotPassword
+exports.forgotPasswordFlatOwner = handlerFactory.forgotPassword(
+	FlatOwner,
 	"owner"
 );
 
 /***********RESET PASSWORD**********/
-// POST -> /api/v1/users/resetPassword
-exports.resetPasswordUser = handlerFactory.resetPassword(User);
-// POST -> /api/v1/recruiter/resetPassword
-exports.resetPasswordRecruiter = handlerFactory.resetPassword(Recruiter);
+// POST -> /api/v1/tenants/resetPassword
+exports.resetPasswordTenant = handlerFactory.resetPassword(Tenant);
+// POST -> /api/v1/flatOwners/resetPassword
+exports.resetPasswordFlatOwner = handlerFactory.resetPassword(FlatOwner);
