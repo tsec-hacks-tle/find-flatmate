@@ -100,7 +100,7 @@ const roomSchema = mongoose.Schema({
 		default: true,
 	},
 
-	room_price: {
+	price: {
 		type: Number,
 		required: true,
 	},
