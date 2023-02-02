@@ -13,10 +13,14 @@ const Header = () => {
     <header className='header'>
       <div className='nav-left'>
         <Link to='/' className='logo'>
-          Find
+          Find Mate
         </Link>
-        <Link to='/search/project'>Explore Work</Link>
-        <Link to='/search/users'>Search Job Hunters</Link>
+        <Link to='/search/project' style={{ fontSize: "1.4rem" }}>
+          Browse Rooms
+        </Link>
+        <Link to='/search/users' style={{ fontSize: "1.4rem" }}>
+          Browse Room mates
+        </Link>
       </div>
       <div className='nav-right'>
         {user ? (

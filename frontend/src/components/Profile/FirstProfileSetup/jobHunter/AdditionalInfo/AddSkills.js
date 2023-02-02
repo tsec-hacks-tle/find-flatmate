@@ -3,6 +3,7 @@ import SectionHeader from "./SectionHeader";
 import classes from "../JobHunterUpdate.module.css";
 import TechnologyArray from "../../../../../utils/TechnologyArray";
 import Select from "react-select";
+import foodArray from "../../../../../utils/FoodArray";
 
 const selectStyles = {
   control: (base) => ({
@@ -16,17 +17,14 @@ const selectStyles = {
 const AddSkills = ({ handleSkills }) => {
   return (
     <section>
-      <SectionHeader title='Skills and Expertise'></SectionHeader>
+      <SectionHeader title='Food Preference'></SectionHeader>
       <div className={classes["location-container"]}>
-        <h1>Select skills *</h1>
+        <h1>Select food preference</h1>
         <Select
-          isMulti
-          name='aval'
-          onChange={handleSkills}
+          options={foodArray}
+          name='food_preference'
           styles={selectStyles}
-          options={TechnologyArray}
-          className='basic-multi-select'
-          classNamePrefix='select'
+          onChange={handleSkills}
         />
       </div>
     </section>

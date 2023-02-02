@@ -3,6 +3,7 @@ import SectionHeader from "./SectionHeader";
 import classes from "../JobHunterUpdate.module.css";
 import Select from "react-select";
 import LocationArray from "../../../../../utils/LocationArray";
+import hobbiesArray from "../../../../../utils/HobbiesArray";
 
 const selectStyles = {
   control: (base) => ({
@@ -16,15 +17,15 @@ const selectStyles = {
 const AddLocation = ({ handleLocation }) => {
   return (
     <section>
-      <SectionHeader title='Location'></SectionHeader>
+      <SectionHeader title='Hobbies'></SectionHeader>
       <div className={classes["location-container"]}>
-        <h1>Select cities where you are willing to work</h1>
+        <h1>Select your hobbies or interests</h1>
         <Select
           isMulti
-          name='aval'
+          name='hobbies'
           onChange={handleLocation}
           styles={selectStyles}
-          options={LocationArray}
+          options={hobbiesArray}
           className='basic-multi-select'
           classNamePrefix='select'
         />

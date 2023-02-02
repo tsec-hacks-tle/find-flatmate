@@ -86,7 +86,7 @@ const ProfessionalInformation = ({ changeStep }) => {
     const data = {
       experience: workExp,
       profession: profession,
-      eduction: eduction,
+      education: eduction,
     };
 
     console.log(data);

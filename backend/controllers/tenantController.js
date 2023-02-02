@@ -52,21 +52,12 @@ exports.updateMe = catchAsync(async (req, res, next) => {
       cloudinary.v2.uploader.destroy(req.user.photo.public_id);
     }
 
-<<<<<<< Updated upstream
-		// add new image
-		const result = await cloudinary.v2.uploader.upload(file, {
-			folder: process.env.CLOUDINARY_TENANT_PHOTO,
-			width: 150,
-			crop: "scale",
-		});
-=======
     // add new image
     const result = await cloudinary.v2.uploader.upload(file, {
-      folder: process.env.CLOUDINARY_USER_PHOTO,
+      folder: process.env.CLOUDINARY_TENANT_PHOTO,
       width: 150,
       crop: "scale",
     });
->>>>>>> Stashed changes
 
     newTenantData.photo = {
       public_id: result.public_id,
