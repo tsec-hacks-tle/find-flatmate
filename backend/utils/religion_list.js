@@ -1,1 +1,1 @@
-module.exports = ["Hindu", "Buddhism", "Islam", "Christian"];
+module.exports = ["hindu", "buddhism", "islam", "christian"];

@@ -54,7 +54,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 
 		// add new image
 		const result = await cloudinary.v2.uploader.upload(file, {
-			folder: process.env.CLOUDINARY_USER_PHOTO,
+			folder: process.env.CLOUDINARY_TENANT_PHOTO,
 			width: 150,
 			crop: "scale",
 		});

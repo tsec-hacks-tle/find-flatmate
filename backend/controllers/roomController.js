@@ -11,7 +11,7 @@ exports.getRoom = handlerFactory.getOne(Room, {
 });
 
 exports.getMyRooms = catchAsync(async (req, res, next) => {
-	const id = req.flatOwner._id;
+	const id = req.user._id;
 
 	const rooms = await Room.find({ flatOwner: id });
 
@@ -66,7 +66,7 @@ exports.updateRoom = catchAsync(async (req, res, next) => {
 	if (!room) return next(new AppError("Room not found", 404));
 
 	// Only the room belonging to the user can be updated
-	if (req.flatOwner.id !== room.flatOwner.toString()) {
+	if (req.user.id !== room.flatOwner.toString()) {
 		return next(new AppError("FlatOwner not authorized", 404));
 	}
 

@@ -11,13 +11,13 @@ exports.signup = (Model) =>
 		// Check if email exists
 		const user = await Model.findOne({ email: req.body.email });
 
-		// If exists sohwq error
+		// If exists show error
 		if (user) return next(new AppError(`Email already exists`, 400));
 
 		// Create new user if all valid
 		const newUser = await Model.create(req.body);
 
-		// Send welcomming email
+		// Send welcoming email
 
 		// Create JWT Token and send
 		createSendToken(newUser, 201, req, res);

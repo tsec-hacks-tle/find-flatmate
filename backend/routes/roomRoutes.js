@@ -3,21 +3,21 @@ const { route } = require("express/lib/application");
 const authController = require("../controllers/authController");
 const roomController = require("../controllers/roomController");
 const { protect } = require("../middlewares/auth");
-const Tenant = require("../models/tenentModel");
+const FlatOwner = require("../models/flatOwnerModel");
 
 const router = express.Router();
 
 router
 	.route("/")
 	.post(roomController.getAllRooms)
-	.post(protect(Tenant), roomController.addRoom);
+	.post(protect(FlatOwner), roomController.addRoom);
 
-router.get("/me", protect(Tenant), roomController.getMyRooms);
+router.get("/me", protect(FlatOwner), roomController.getMyRooms);
 
 router
 	.route("/:id")
 	.get(roomController.getRoom)
-	.patch(protect(Tenant), roomController.updateRoom)
-	.delete(protect(Tenant), roomController.deleteRoom);
+	.patch(protect(FlatOwner), roomController.updateRoom)
+	.delete(protect(FlatOwner), roomController.deleteRoom);
 
 module.exports = router;

@@ -4,23 +4,27 @@ const religion_list = require("../utils/religion_list");
 
 const roomSchema = mongoose.Schema({
 	city: {
-		type: "String",
+		type: String,
 		required: [true, "A room must have a city"],
 	},
 
 	landmark: {
-		type: "String",
+		type: String,
 		required: [true, "A room must have a landmark"],
 	},
 
 	state: {
-		type: "String",
+		type: String,
 		required: [true, "A room must have a state"],
 	},
 
 	postalCode: {
-		type: "String",
+		type: String,
 		required: [true, "A room must have a postalCode"],
+	},
+
+	buildingName: {
+		type: String,
 	},
 
 	address: {

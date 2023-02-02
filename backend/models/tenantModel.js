@@ -77,29 +77,33 @@ const tenantSchema = mongoose.Schema(
 			},
 		],
 
-		experience: {
-			companyName: {
-				type: String,
+		experience: [
+			{
+				companyName: {
+					type: String,
+				},
+				jobRole: {
+					type: String,
+				},
+				employmentType: {
+					type: String,
+				},
 			},
-			jobRole: {
-				type: String,
-			},
-			employmentType: {
-				type: String,
-			},
-		},
+		],
 
-		education: {
-			degree: {
-				type: String,
+		education: [
+			{
+				degree: {
+					type: String,
+				},
+				college: {
+					type: String,
+				},
+				course: {
+					type: String,
+				},
 			},
-			college: {
-				type: String,
-			},
-			specialization: {
-				type: String,
-			},
-		},
+		],
 
 		social_links: [
 			{
@@ -119,7 +123,7 @@ const tenantSchema = mongoose.Schema(
 
 		food_preference: {
 			type: String,
-			enum: ["Veg", "Non-Veg"],
+			enum: ["veg", "non-veg"],
 		},
 
 		password: {
