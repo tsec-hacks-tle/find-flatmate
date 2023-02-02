@@ -152,14 +152,112 @@ exports.getAll = (Model) =>
 		const doc = await features.query; // on awaiting, the query will be executed and returns all the matched docs
 		// Here the query will contain query.sort().select().skip().limit()
 
-		if (!doc) {
+		console.log("-->" + req.query);
+		let filteredDoc = doc;
+
+		if (doc[0].role == "tenant") {
+			filteredDoc = doc.filter((obj) => obj._id != req.user.id);
+			for (let i = 0; i < filteredDoc.length; i++) {
+				let match = 0;
+				if (filteredDoc[i].gender === req.user.gender) {
+					match += 30;
+				}
+				if (filteredDoc[i].profession === req.user.profession) {
+					match += 20;
+				}
+				const similarHobbies = filteredDoc[i].hobbies.filter((value) =>
+					req.user.hobbies.includes(value)
+				);
+				if (similarHobbies.length === 1) {
+					match += 10;
+				} else if (similarHobbies.length === 2) {
+					match += 15;
+				} else if (similarHobbies.length !== 0) {
+					match += 20;
+				}
+				if (filteredDoc[i].religion === req.user.religion) {
+					match += 15;
+				}
+				if (
+					filteredDoc[i].food_preference === req.user.food_preference
+				) {
+					match += 15;
+				}
+
+				filteredDoc[i].match = match;
+			}
+		} else {
+			for (let i = 0; i < filteredDoc.length; i++) {
+				console.log(req.query);
+				let match = 0;
+				if (filteredDoc[i].religion === req.user.religion) {
+					match += 10;
+				}
+				const similar = filteredDoc[i].preferences.filter((value) =>
+					req.user.hobbies.includes(value)
+				);
+				if (similar.length === 1) {
+					match += 10;
+				} else if (similar.length === 2) {
+					match += 15;
+				} else if (similar.length !== 0) {
+					match += 20;
+				}
+				if (
+					!req.query.state ||
+					req.query.state === filteredDoc[i].state
+				) {
+					match += 10;
+				}
+				if (!req.query.city || req.query.city === filteredDoc[i].city) {
+					match += 10;
+				}
+				if (
+					!req.query.postalCode ||
+					req.query.postalCode === filteredDoc[i].postalCode
+				) {
+					match += 10;
+				}
+				if (
+					!req.query.ratingsAverage ||
+					req.query.ratingsAverage <= filteredDoc[i].ratingsAverage
+				) {
+					match += 15;
+				}
+				let priceLB = req.query.price.gte;
+				let priceUB = req.query.price.lte;
+				if (priceLB && priceUB) {
+					if (
+						filteredDoc[i].price >= priceLB &&
+						filteredDoc[i].price <= priceUB
+					) {
+						match += 25;
+					}
+				} else if (priceLB) {
+					if (filteredDoc[i].price >= priceLB) {
+						match += 25;
+					}
+				} else if (priceUB) {
+					if (filteredDoc[i].price <= priceUB) {
+						match += 25;
+					}
+				} else {
+					match += 25;
+				}
+				filteredDoc[i].match = match;
+			}
+		}
+
+		const matchSorted = filteredDoc.sort((a, b) => b.match - a.match);
+
+		if (!matchSorted) {
 			return next(new AppError("Not found"));
 		}
 
 		res.status(200).json({
 			success: true,
-			results: doc.length,
-			data: doc,
+			results: matchSorted.length,
+			data: matchSorted,
 		});
 	});
 

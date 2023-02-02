@@ -125,6 +125,9 @@ const tenantSchema = mongoose.Schema(
 			type: String,
 			enum: ["veg", "non-veg"],
 		},
+		match: {
+			type: Number,
+		},
 
 		// TODO: habits: [
 		// 	{

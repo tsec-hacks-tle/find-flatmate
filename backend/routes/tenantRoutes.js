@@ -19,7 +19,7 @@ router.get("/me", protect(Tenant), tenantController.getMe);
 router.patch("/updateMe", protect(Tenant), tenantController.updateMe);
 
 // This is kept done as other routes might affect :id
-router.route("/").post(tenantController.getAllTenants);
-router.route("/:id").get(tenantController.getTenant);
+router.route("/").post(protect(Tenant), tenantController.getAllTenants);
+router.route("/:id").get(protect(Tenant), tenantController.getTenant);
 
 module.exports = router;

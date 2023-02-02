@@ -1,10 +1,14 @@
 const mongoose = require("mongoose");
 const hobbies_list = require("../utils/hobbies_list");
 const religion_list = require("../utils/religion_list");
+const city_list = require("../utils/city_list");
+const state_list = require("../utils/state_list");
+const postalcode_list = require("../utils/pincode_list");
 
 const roomSchema = mongoose.Schema({
 	city: {
 		type: String,
+		enum: city_list,
 		required: [true, "A room must have a city"],
 	},
 
@@ -15,11 +19,13 @@ const roomSchema = mongoose.Schema({
 
 	state: {
 		type: String,
+		enum: state_list,
 		required: [true, "A room must have a state"],
 	},
 
 	postalCode: {
 		type: String,
+		enum: postalcode_list,
 		required: [true, "A room must have a postalCode"],
 	},
 
@@ -103,6 +109,10 @@ const roomSchema = mongoose.Schema({
 	price: {
 		type: Number,
 		required: true,
+	},
+
+	match: {
+		type: Number,
 	},
 
 	preferences: [
