@@ -13,6 +13,9 @@ const recruiterSchema = mongoose.Schema({
     type: "String",
     required: [true, "A recruiter must have a company email"],
   },
+  gender: {
+    type: String,
+  }
   photo: {
     public_id: {
       type: String,
