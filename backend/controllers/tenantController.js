@@ -1,6 +1,6 @@
 const cloudinary = require("cloudinary");
-const Project = require("../models/projectModel");
-const User = require("../models/tenentModel");
+const Room = require("../models/roomModel");
+const User = require("../models/tenantModel");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 const handlerFactory = require("./handlerFactory");
@@ -9,7 +9,7 @@ exports.getAllUsers = handlerFactory.getAll(User);
 exports.getUser = catchAsync(async (req, res, next) => {
 	const doc = await User.findById(req.params.id);
 	// Get Projects
-	const projects = await Project.find({ user: req.params.id });
+	const projects = await Room.find({ user: req.params.id });
 	if (!doc) {
 		return next(new AppError("No document found with that ID", 404));
 	}
@@ -23,7 +23,7 @@ exports.getUser = catchAsync(async (req, res, next) => {
 		},
 	});
 });
-exports.getMe = handlerFactory.getMe(User, { path: "projects" });
+exports.getMe = handlerFactory.getMe(User);
 
 exports.getMyCollections = handlerFactory.getMyCollections(User);
 exports.saveProjectToCollection = handlerFactory.saveProjectToCollection(User);

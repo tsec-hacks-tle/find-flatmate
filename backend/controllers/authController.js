@@ -1,5 +1,5 @@
-const User = require("../models/tenentModel");
-const Recruiter = require("../models/recruiterModel");
+const User = require("../models/tenantModel");
+const Recruiter = require("../models/flatOwnerModel");
 const handlerFactory = require("./handlerFactory");
 
 /***********SIGNUP**********/

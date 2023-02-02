@@ -7,11 +7,11 @@ const professions = require("../utils/profession_list");
 const hobbies = require("../utils/hobbies_list");
 const religions = require("../utils/religion_list");
 
-const userSchema = mongoose.Schema(
+const tenantSchema = mongoose.Schema(
 	{
 		name: {
 			type: String,
-			required: [true, "A user must have a name"],
+			required: [true, "A tenant must have a name"],
 		},
 
 		email: {
@@ -48,6 +48,11 @@ const userSchema = mongoose.Schema(
 
 		age: {
 			type: Number,
+		},
+
+		roomOccupied: {
+			type: Boolean,
+			default: false,
 		},
 
 		gender: {
@@ -119,7 +124,7 @@ const userSchema = mongoose.Schema(
 
 		password: {
 			type: String,
-			required: [true, "A user must have a password"],
+			required: [true, "A tenant must have a password"],
 			minlength: [8, "A password must have at least 8 character"],
 			select: false,
 		},
@@ -133,14 +138,8 @@ const userSchema = mongoose.Schema(
 	}
 );
 
-// userSchema.virtual("projects", {
-// 	ref: "Project",
-// 	foreignField: "user",
-// 	localField: "_id",
-// });
-
 // Encrypt Password before save
-userSchema.pre("save", async function (next) {
+tenantSchema.pre("save", async function (next) {
 	//Only run this function if password is modified
 	if (!this.isModified("password")) return next();
 
@@ -150,14 +149,14 @@ userSchema.pre("save", async function (next) {
 	next();
 });
 
-userSchema.methods.correctPassword = function (
+tenantSchema.methods.correctPassword = function (
 	candidatePassword,
-	userPassword
+	tenantPassword
 ) {
-	return bcrypt.compare(candidatePassword, userPassword);
+	return bcrypt.compare(candidatePassword, tenantPassword);
 };
 
-userSchema.methods.createPasswordResetToken = function () {
+tenantSchema.methods.createPasswordResetToken = function () {
 	const resetToken = crypto.randomBytes(32).toString("hex");
 
 	this.passwordResetToken = crypto
@@ -170,5 +169,5 @@ userSchema.methods.createPasswordResetToken = function () {
 	return resetToken;
 };
 
-const User = mongoose.model("User", userSchema);
-module.exports = User;
+const Tenant = mongoose.model("Tenant", tenantSchema);
+module.exports = Tenant;
