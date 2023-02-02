@@ -126,6 +126,13 @@ const tenantSchema = mongoose.Schema(
 			enum: ["veg", "non-veg"],
 		},
 
+		// TODO: habits: [
+		// 	{
+		// 		type: String,
+		// 		en
+		// 	}
+		// ]
+
 		password: {
 			type: String,
 			required: [true, "A tenant must have a password"],

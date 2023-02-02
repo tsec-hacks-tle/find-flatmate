@@ -7,10 +7,9 @@ const FlatOwner = require("../models/flatOwnerModel");
 
 const router = express.Router();
 
-router
-	.route("/")
-	.post(roomController.getAllRooms)
-	.post(protect(FlatOwner), roomController.addRoom);
+router.route("/").post(roomController.getAllRooms);
+
+router.route("/add").post(protect(FlatOwner), roomController.addRoom);
 
 router.get("/me", protect(FlatOwner), roomController.getMyRooms);
 

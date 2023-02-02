@@ -26,28 +26,28 @@ exports.getMyRooms = catchAsync(async (req, res, next) => {
 exports.addRoom = catchAsync(async (req, res, next) => {
 	console.log(req);
 
-	let images = [];
-	if (typeof req.body.images === "string") {
-		images.push(req.body.images);
-	} else {
-		images = req.body.images;
-	}
+	// let images = [];
+	// if (typeof req.body.images === "string") {
+	// 	images.push(req.body.images);
+	// } else {
+	// 	images = req.body.images;
+	// }
 
-	let imagesLinks = [];
+	// let imagesLinks = [];
 
-	for (const element of images) {
-		const result = await cloudinary.v2.uploader.upload(element, {
-			folder: "rooms",
-		});
+	// for (const element of images) {
+	// 	const result = await cloudinary.v2.uploader.upload(element, {
+	// 		folder: "rooms",
+	// 	});
 
-		imagesLinks.push({
-			public_id: result.public_id,
-			url: result.secure_url,
-		});
-	}
+	// 	imagesLinks.push({
+	// 		public_id: result.public_id,
+	// 		url: result.secure_url,
+	// 	});
+	// }
 
-	req.body.images = imagesLinks;
-	req.body.user = req.user.id;
+	// req.body.images = imagesLinks;
+	// req.body.user = req.user.id;
 
 	const room = await Room.create(req.body);
 
