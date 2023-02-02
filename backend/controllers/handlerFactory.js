@@ -189,16 +189,30 @@ exports.getAll = (Model) =>
         if (filteredDoc[i].religion === req.user.religion) {
           match += 10;
         }
-        const similar = filteredDoc[i].preferences.filter((value) =>
-          req.user.hobbies.includes(value)
-        );
-        if (similar.length === 1) {
-          match += 10;
-        } else if (similar.length === 2) {
-          match += 15;
-        } else if (similar.length !== 0) {
-          match += 20;
+        if (req.body.preferences) {
+          const similar = filteredDoc[i].preferences.filter((value) =>
+            req.body.preferences.includes(value)
+          );
+          if (similar.length === 1) {
+            match += 10;
+          } else if (similar.length === 2) {
+            match += 15;
+          } else if (similar.length !== 0) {
+            match += 20;
+          }
+        } else {
+          const similar = filteredDoc[i].preferences.filter((value) =>
+            req.user.hobbies.includes(value)
+          );
+          if (similar.length === 1) {
+            match += 10;
+          } else if (similar.length === 2) {
+            match += 15;
+          } else if (similar.length !== 0) {
+            match += 20;
+          }
         }
+
         if (!req.query.state || req.query.state === filteredDoc[i].state) {
           match += 10;
         }

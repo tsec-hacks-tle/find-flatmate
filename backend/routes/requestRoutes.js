@@ -7,11 +7,12 @@ const Tenant = require("../models/tenantModel");
 
 const router = express.Router();
 
-router.get("/me", protect(Tenant, FlatOwner), requestController.getMyRequests);
+router.get("/me", protect(Tenant), requestController.getMyRequests);
 
 router
 	.route("/:id")
-	.post(protect(Tenant), requestController.addRequests)
+	.get(protect(FlatOwner), requestController.getRequestsByRoom)
+	.post(protect(Tenant), requestController.addRequest)
 	.delete(protect(FlatOwner, Tenant), requestController.deleteRequests);
 
 module.exports = router;

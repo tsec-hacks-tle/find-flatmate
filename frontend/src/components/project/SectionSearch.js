@@ -15,13 +15,14 @@ import hobbiesArray from "../../utils/HobbiesArray";
 
 const SearchPanel = () => {
   const [locat, setLocat] = useState([]);
-  const [techArray, setTechArray] = useState([]);
+  const [interests, setInterests] = useState([]);
   const [price, setPrice] = useState("");
 
   const dispatch = useDispatch();
 
   const handleSumbit = () => {
     let selectedLocations = locat.map((e) => e.value);
+    let selectedInterests = interests.map((e) => e.value);
     let selectedPrice = [];
 
     if (price) {
@@ -32,6 +33,10 @@ const SearchPanel = () => {
 
     if (selectedLocations.length > 0) {
       body.city = selectedLocations;
+    }
+
+    if (selectedInterests.length > 0) {
+      body.preferences = selectedInterests;
     }
 
     dispatch(
@@ -94,7 +99,7 @@ const SearchPanel = () => {
               isMulti
               name='aval'
               onChange={(e) => {
-                console.log(e);
+                setInterests(e);
               }}
               options={hobbiesArray}
               className='basic-multi-select'
