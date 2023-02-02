@@ -17,7 +17,7 @@ const fetchProjects = async ({
   }
 
   const { data } = await axios.post(
-    `${API_URL}projects?page=${page}&limit=${perPage}&keyword=${keyword}`,
+    `${API_URL}rooms?page=${page}&limit=${perPage}&keyword=${keyword}`,
     body
   );
   console.log(data);

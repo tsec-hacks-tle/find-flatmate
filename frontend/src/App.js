@@ -41,7 +41,7 @@ function App() {
           path='/jobHunter/:jobHunterId'
           element={<JobHunterDetailsPage />}
         /> */}
-        {/* <Route path='/search/project' element={<ShowProjects />} /> */}
+        <Route path='/search/project' element={<ShowProjects />} />
         {/* <Route path='/search/users' element={<ShowJobHunters />} /> */}
         <Route path='/forgotPassword' element={<ForgotPassword />} />
 

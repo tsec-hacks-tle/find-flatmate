@@ -8,20 +8,22 @@ import ProjectsSkeletion from "./ProjectsSkeletion";
 const SectionProjects = () => {
   const { projects, isLoading } = useSelector((state) => state.projects);
 
+  console.log("-", projects);
+
   return (
     <section className={classes["section-projects"]}>
       <div className={classes["projects"]}>
-        {isLoading ? (
-          <ChakraProvider>
+        <ChakraProvider>
+          {isLoading ? (
             <ProjectsSkeletion />
-          </ChakraProvider>
-        ) : projects.length === 0 ? (
-          <p className='not-found grid-span'>Couldn't find any project.</p>
-        ) : (
-          projects.map((project) => (
-            <Project key={project._id} project={project} />
-          ))
-        )}
+          ) : projects.length === 0 ? (
+            <p className='not-found grid-span'>Couldn't find any project.</p>
+          ) : (
+            projects.map((project) => (
+              <Project key={project._id} project={project} />
+            ))
+          )}
+        </ChakraProvider>
       </div>
     </section>
   );

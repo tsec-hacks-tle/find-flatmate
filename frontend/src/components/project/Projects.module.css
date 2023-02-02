@@ -8,10 +8,11 @@
 }
 
 .search-panel {
-  max-width: 650px;
-  margin: 0 auto;
-  z-index: 100;
-  position: relative;
+  /* max-width: 650px; */
+  /* margin: 0 auto; */
+  /* z-index: 100; */
+  /* position: relative; */
+  margin-left: 8%;
 }
 
 .filter-panel {
@@ -165,4 +166,54 @@
   color: #333;
   letter-spacing: 0.7px;
   opacity: 0.8;
+}
+
+.card {
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 15%);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-image {
+  max-width: 100%;
+}
+
+.card-body {
+  padding: 2rem 3rem;
+}
+
+.card-name {
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+  font-weight: 800;
+}
+
+.card-second-name {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+  letter-spacing: 0.7px;
+  font-size: 500;
+  margin-bottom: 2rem;
+}
+
+.card-footer {
+  display: flex;
+  flex-direction: row;
+  gap: 1.2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-rating {
+  background-color: rgb(99, 193, 99);
+  padding: 6px 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-capacity {
+  font-size: 1.5rem;
 }
