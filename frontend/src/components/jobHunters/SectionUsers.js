@@ -5,25 +5,27 @@ import ProjectsSkeletion from "../project/ProjectsSkeletion";
 import FilterSection from "./FilterSection";
 import JobHunter from "./JobHunter";
 import classes from "./Users.module.css";
+import DefaultPhoto from "../../assets/default.jpg";
 
 const SectionUsers = () => {
   const { users, isLoading } = useSelector((state) => state.jobHunters);
 
   return (
-    <ChakraProvider>
-      <section className={classes["section-users"]}>
-        <FilterSection />
-        <div className={classes["users"]}>
+    <section className={classes["section-projects"]}>
+      <div className={classes["projects"]}>
+        <ChakraProvider>
           {isLoading ? (
             <ProjectsSkeletion />
           ) : users.length === 0 ? (
-            <p className='not-found'>Couldn't find any users.</p>
+            <p className='not-found grid-span'>Couldn't find any mates.</p>
           ) : (
-            users.map((user) => <JobHunter key={user._id} user={user} />)
+            users.map((project) => (
+              <JobHunter key={project._id} user={project} />
+            ))
           )}
-        </div>
-      </section>
-    </ChakraProvider>
+        </ChakraProvider>
+      </div>
+    </section>
   );
 };
 

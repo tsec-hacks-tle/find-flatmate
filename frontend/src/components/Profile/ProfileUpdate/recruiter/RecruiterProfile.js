@@ -41,16 +41,7 @@ const RecruiterProfile = () => {
                   <div className={classes["user-email"]}>
                     <a href={`mailto:${user?.email}`}>Email</a>
                   </div>
-                  <div className={classes["user-email"]}>
-                    <a
-                      href={`${user?.website}`}
-                      without
-                      rel='noreferrer'
-                      target='_blank'
-                      style={{ display: "flex", alignItems: "center" }}>
-                      Company Website <ExternalLinkIcon />
-                    </a>
-                  </div>
+                  <div className={classes["user-email"]}></div>
                 </div>
               </div>
             </div>

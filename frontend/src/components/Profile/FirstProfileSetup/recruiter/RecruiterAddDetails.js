@@ -6,6 +6,14 @@ import { reset, updateUser } from "../../../../store/auth/authSlice";
 import { buttonStyles } from "../../../layout/compnentStyles";
 import { Button, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Select from "react-select";
+import genders from "../../../../utils/GenderArray";
+
+const customStyles = {
+  control: (base) => ({
+    ...base,
+  }),
+};
 
 const AddDetailsForm = () => {
   const { user, isError, isUpdateSuccess, message, isUpdateLoading } =
@@ -22,13 +30,14 @@ const AddDetailsForm = () => {
     description: "",
   });
   const [photoPreview, setPhotoPreview] = useState("");
+  const [gender, setGender] = useState("");
 
   const { photo, name, email, website, description } = formData;
 
   useEffect(() => {
     if (isError) alert.error(message);
 
-    if (isUpdateSuccess) navigate("/search/project");
+    if (isUpdateSuccess) navigate("/search/rooms");
 
     dispatch(reset());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,8 +84,9 @@ const AddDetailsForm = () => {
     updateData.set("name", name);
     updateData.set("email", email);
     updateData.set("photo", photo);
-    updateData.set("website", website);
-    updateData.set("description", description);
+    updateData.set("gender", gender);
+    updateData.set("bio", description);
+    updateData.set("gender", gender);
 
     // //Call api
     dispatch(updateUser(formData));
@@ -98,14 +108,14 @@ const AddDetailsForm = () => {
           {photoPreview ? (
             <img src={photoPreview} alt='avatar' />
           ) : (
-            <p>Add Company Logo +</p>
+            <p>Add Photo +</p>
           )}
         </div>
       </label>
       <div className={classes["profile-update-fields"]}>
         <form onSubmit={submitHandler}>
           <div className={classes["form-group"]}>
-            <label htmlFor='name'>Company Name *</label>
+            <label htmlFor='name'>Owner Name *</label>
             <input
               id='name'
               name='name'
@@ -117,7 +127,7 @@ const AddDetailsForm = () => {
             />
           </div>
           <div className={classes["form-group"]}>
-            <label htmlFor='email'>Company Email *</label>
+            <label htmlFor='email'>Owner Email *</label>
             <input
               id='email'
               name='email'
@@ -125,24 +135,29 @@ const AddDetailsForm = () => {
               type='text'
               placeholder='Ex. johndoe@company.com'
               onChange={onChange}
+              disabled
               required
             />
           </div>
           <div className={classes["form-group"]}>
-            <label htmlFor='website'>Company URL *</label>
-            <input
-              id='website'
-              name='website'
-              value={website}
-              type='text'
-              placeholder='Ex. https://company.com'
-              onChange={onChange}
-              required
-            />
+            <label htmlFor='website'>Owner Gender</label>
+            <div style={{ width: "100%" }}>
+              <Select
+                name='location'
+                onChange={(e) => {
+                  setGender(e.value);
+                }}
+                options={genders}
+                className='basic-multi-select'
+                classNamePrefix='select'
+                placeholder='Select Gender'
+                styles={customStyles}
+              />
+            </div>
           </div>
 
           <div className={classes["form-group"]}>
-            <label htmlFor='bio'>About Company *</label>
+            <label htmlFor='bio'>About You</label>
             <textarea
               id='description'
               name='description'

@@ -26,7 +26,7 @@ const LoginForm = ({ role }) => {
     }
 
     if (isSuccess || user) {
-      navigate("/search/project");
+      navigate("/search/rooms");
     }
 
     dispatch(reset());

@@ -5,7 +5,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate("/search/project");
+    navigate("/search/rooms");
   }, [navigate]);
 
   return <p>Hello</p>;

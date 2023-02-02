@@ -15,12 +15,16 @@ const Header = () => {
         <Link to='/' className='logo'>
           Find Mate
         </Link>
-        <Link to='/search/project' style={{ fontSize: "1.4rem" }}>
-          Browse Rooms
-        </Link>
-        <Link to='/search/users' style={{ fontSize: "1.4rem" }}>
-          Browse Room mates
-        </Link>
+        {user && user.role === "tenant" && (
+          <>
+            <Link to='/search/rooms' style={{ fontSize: "1.4rem" }}>
+              Browse Rooms
+            </Link>
+            <Link to='/search/tenants' style={{ fontSize: "1.4rem" }}>
+              Browse Room mates
+            </Link>
+          </>
+        )}
       </div>
       <div className='nav-right'>
         {user ? (

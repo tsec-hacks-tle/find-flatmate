@@ -103,10 +103,10 @@
 
 .page-title {
   color: #0d6ddf;
-  font-size: 1.4rem;
+  font-size: 2rem;
   font-weight: 700;
   letter-spacing: 0.5px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.6rem;
 }
 
 .filter-panel {
@@ -186,6 +186,7 @@
   font-size: 1.8rem;
   margin-bottom: 4px;
   font-weight: 800;
+  text-transform: capitalize;
 }
 
 .card-second-name {
@@ -194,13 +195,14 @@
   letter-spacing: 0.7px;
   font-size: 500;
   margin-bottom: 2rem;
+  text-transform: capitalize;
 }
 
 .card-footer {
   display: flex;
   flex-direction: row;
-  gap: 1.2rem;
-  justify-content: center;
+  gap: 2rem;
+  justify-content: start;
   align-items: center;
 }
 
@@ -216,4 +218,23 @@
 
 .card-capacity {
   font-size: 1.5rem;
+}
+
+.card-match {
+  min-height: 28px;
+  font-size: 1.6rem;
+  line-height: 1.75rem;
+  letter-spacing: -0.02em;
+  color: rgb(86, 100, 116);
+  display: flex;
+  align-items: center;
+}
+
+.card-match-header {
+  background: #eafaf1;
+  border: 1px solid #2ec971;
+  padding: 0 10px;
+  border-radius: 5px;
+  cursor: default;
+  position: absolute;
 }

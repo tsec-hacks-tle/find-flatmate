@@ -38,7 +38,7 @@ const JobHunterSignupForm = () => {
     }
 
     if (user) {
-      navigate("/search/project");
+      navigate("/search/rooms");
     }
 
     dispatch(reset());

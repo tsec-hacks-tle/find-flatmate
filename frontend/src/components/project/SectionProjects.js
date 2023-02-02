@@ -17,7 +17,7 @@ const SectionProjects = () => {
           {isLoading ? (
             <ProjectsSkeletion />
           ) : projects.length === 0 ? (
-            <p className='not-found grid-span'>Couldn't find any project.</p>
+            <p className='not-found grid-span'>Couldn't find any rooms.</p>
           ) : (
             projects.map((project) => (
               <Project key={project._id} project={project} />

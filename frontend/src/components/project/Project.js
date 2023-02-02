@@ -4,12 +4,32 @@ import classes from "./Projects.module.css";
 
 import ImageHouse from "../../assets/img_house.webp";
 import { Icon, StarIcon } from "@chakra-ui/icons";
+import rightIcon from "../../assets/thumbsUp.svg";
 
 const Project = ({ project }) => {
   const navigate = useNavigate();
 
   return (
     <div className={classes["card"]}>
+      <div className={classes["card-match-header"]}>
+        <div className={classes["card-match"]}>
+          <img
+            src={rightIcon}
+            alt='thumbs up'
+            style={{ height: "12px", width: "auto" }}
+          />
+          <span
+            style={{
+              color: "rgb(46, 201, 113)",
+              marginLeft: "5px",
+              marginRight: "5px",
+              fontWeight: "bold",
+            }}>
+            {project.match}%
+          </span>
+          Match
+        </div>
+      </div>
       <div className={classes["card-image"]}>
         <img
           src={ImageHouse}
@@ -36,7 +56,7 @@ const Project = ({ project }) => {
           </div>
 
           <div className={classes["card-capacity"]}>
-            <p>Max: {project.capacity} People</p>
+            <p>👤 {project.capacity}</p>
           </div>
 
           <div className={classes["card-capacity"]}>

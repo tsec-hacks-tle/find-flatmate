@@ -17,7 +17,7 @@ const ForgotForm = ({ role }) => {
 
   useEffect(() => {
     if (user) {
-      navigate("/search/project");
+      navigate("/search/rooms");
     }
   }, [user, navigate]);
 

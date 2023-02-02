@@ -3,9 +3,23 @@ import axios from "axios";
 const API_URL = "/api/v1/";
 
 // Fetch User
-const fetchJobHunters = async (tags) => {
-  console.log(tags);
-  const { data } = await axios.post(`${API_URL}users`, tags);
+const fetchJobHunters = async (filteredData) => {
+  // console.log(tags);
+  let url = `${API_URL}tenants?`;
+
+  // console.log(filteredData.data);
+
+  if (filteredData?.gender) url += `gender=${filteredData.gender}&`;
+  if (filteredData?.profession) url += `profession=${filteredData.profession}&`;
+  if (filteredData?.food) url += `food_preference=${filteredData.food}&`;
+  if (filteredData?.religion) url += `gender=${filteredData.religion}`;
+
+  let body = {};
+  if (filteredData?.body) body = filteredData?.body;
+
+  // console.log(body);
+
+  const { data } = await axios.post(url, body);
   console.log(data);
 
   return data.data;

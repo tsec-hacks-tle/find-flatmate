@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className='footer'>
       <div className='footer-logo'>
         <Link to='/' className='link logo logo-footer'>
-          Find
+          Find Mate
         </Link>
       </div>
       <div className='footer-description'>

@@ -41,8 +41,15 @@ function App() {
           path='/jobHunter/:jobHunterId'
           element={<JobHunterDetailsPage />}
         /> */}
-        <Route path='/search/project' element={<ShowProjects />} />
-        {/* <Route path='/search/users' element={<ShowJobHunters />} /> */}
+        {/* {user && user.role === "tenant" && (
+          <> */}
+        <Route path='/search/rooms' element={<ShowProjects user={user} />} />
+        <Route
+          path='/search/tenants'
+          element={<ShowJobHunters user={user} />}
+        />
+        {/* </> */}
+        {/* )} */}
         <Route path='/forgotPassword' element={<ForgotPassword />} />
 
         {/* Job Hunter routes */}
@@ -58,6 +65,7 @@ function App() {
         />
 
         {/* Protected Routes */}
+
         <Route element={<ProtectedRoute />}>
           <Route path='/profile' element={<Profile />} />
         </Route>

@@ -56,7 +56,7 @@ const AdditionalInfo = () => {
     if (isError) alert.error(message);
 
     if (isUpdateSuccess) {
-      navigate("/search/project");
+      navigate("/search/rooms");
     }
 
     dispatch(reset());
