@@ -7,11 +7,11 @@ const crypto = require("crypto");
 const flatOwnerSchema = mongoose.Schema({
 	name: {
 		type: String,
-		required: [true, "A recruiter must have a company name"],
+		required: [true, "A flat owner must have a name"],
 	},
 	email: {
 		type: String,
-		required: [true, "A recruiter must have a company email"],
+		required: [true, "A flat owner must have a email"],
 	},
 	gender: {
 		type: String,
@@ -30,7 +30,7 @@ const flatOwnerSchema = mongoose.Schema({
 	},
 	role: {
 		type: String,
-		default: "flat_owner",
+		default: "flatowner",
 	},
 	password: {
 		type: String,

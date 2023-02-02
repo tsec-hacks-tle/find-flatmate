@@ -1,20 +1,17 @@
 const cloudinary = require("cloudinary");
 const Room = require("../models/roomModel");
-const User = require("../models/tenantModel");
+const Tenant = require("../models/tenantModel");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 const handlerFactory = require("./handlerFactory");
 
-exports.getAllUsers = handlerFactory.getAll(User);
-exports.getUser = catchAsync(async (req, res, next) => {
-	const doc = await User.findById(req.params.id);
-	// Get Projects
-	const projects = await Room.find({ user: req.params.id });
+exports.getAllTenants = handlerFactory.getAll(Tenant);
+exports.getTenant = catchAsync(async (req, res, next) => {
+	const doc = await Tenant.findById(req.params.id);
+
 	if (!doc) {
 		return next(new AppError("No document found with that ID", 404));
 	}
-
-	doc.projects = projects;
 
 	res.status(200).json({
 		status: "success",
@@ -23,12 +20,7 @@ exports.getUser = catchAsync(async (req, res, next) => {
 		},
 	});
 });
-exports.getMe = handlerFactory.getMe(User);
-
-exports.getMyCollections = handlerFactory.getMyCollections(User);
-exports.saveProjectToCollection = handlerFactory.saveProjectToCollection(User);
-exports.removeProjectFromCollection =
-	handlerFactory.removeProjectFromCollection(User);
+exports.getMe = handlerFactory.getMe(Tenant);
 
 // Update Profile
 // Update User Profile ==> /api/v1/users/updateMe

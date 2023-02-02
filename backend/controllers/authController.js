@@ -16,11 +16,11 @@ exports.loginRecruiter = handlerFactory.login(Recruiter);
 
 /***********FORGOT PASSWORD**********/
 // POST -> /api/v1/users/forgotPassword
-exports.forgotPasswordUser = handlerFactory.forgotPassword(User, "jobHunter");
+exports.forgotPasswordUser = handlerFactory.forgotPassword(User, "tenant");
 // POST -> /api/v1/recruiter/forgotPassword
 exports.forgotPasswordRecruiter = handlerFactory.forgotPassword(
 	Recruiter,
-	"recruiter"
+	"owner"
 );
 
 /***********RESET PASSWORD**********/

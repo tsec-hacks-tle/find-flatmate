@@ -20,7 +20,7 @@ router
 	.route("/updateMe")
 	.patch(protect(FlatOwner), flatOwnerController.updateMe);
 
-router.route("/").get(flatOwnerController.getAllRecruiter);
-router.route("/:id").get(flatOwnerController.getRecruiter);
+router.route("/").get(flatOwnerController.getAllFlatOwner);
+router.route("/:id").get(flatOwnerController.getFlatOwner);
 
 module.exports = router;

@@ -4,28 +4,26 @@ const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 const handlerFactory = require("./handlerFactory");
 
-exports.getAllProjects = handlerFactory.getAll(Room);
-exports.getProject = handlerFactory.getOne(Room, {
+exports.getAllRooms = handlerFactory.getAll(Room);
+exports.getRoom = handlerFactory.getOne(Room, {
 	// path: "user",
 	// select: "name photo title",
 });
 
-exports.getMyProjects = catchAsync(async (req, res, next) => {
-	const id = req.user._id;
+exports.getMyRooms = catchAsync(async (req, res, next) => {
+	const id = req.flatOwner._id;
 
-	const projects = await Project.find({ user: id });
+	const rooms = await Room.find({ flatOwner: id });
 
 	res.status(201).json({
 		status: "success",
 		data: {
-			data: projects,
+			data: rooms,
 		},
 	});
 });
 
-exports.addProject = catchAsync(async (req, res, next) => {
-	const file = req?.files?.photo;
-
+exports.addRoom = catchAsync(async (req, res, next) => {
 	console.log(req);
 
 	let images = [];
@@ -39,7 +37,7 @@ exports.addProject = catchAsync(async (req, res, next) => {
 
 	for (const element of images) {
 		const result = await cloudinary.v2.uploader.upload(element, {
-			folder: "products",
+			folder: "rooms",
 		});
 
 		imagesLinks.push({
@@ -51,38 +49,38 @@ exports.addProject = catchAsync(async (req, res, next) => {
 	req.body.images = imagesLinks;
 	req.body.user = req.user.id;
 
-	const project = await Project.create(req.body);
+	const room = await Room.create(req.body);
 
 	res.status(201).json({
 		status: "success",
 		data: {
-			data: project,
+			data: room,
 		},
 	});
 });
 
-exports.updateProject = catchAsync(async (req, res, next) => {
-	// 1. Check if the projects exits
-	const project = await Project.findById(req.params.id);
+exports.updateRoom = catchAsync(async (req, res, next) => {
+	// 1. Check if the room exits
+	const room = await Room.findById(req.params.id);
 
-	if (!project) return next(new AppError("Project not found", 404));
+	if (!room) return next(new AppError("Room not found", 404));
 
-	// Only the projects belonging to the user can be updated
-	if (req.user.id !== project.user.toString()) {
-		return next(new AppError("User not authorized", 404));
+	// Only the room belonging to the user can be updated
+	if (req.flatOwner.id !== room.flatOwner.toString()) {
+		return next(new AppError("FlatOwner not authorized", 404));
 	}
 
-	const newProjectData = req.body;
+	const newRoomData = req.body;
 
 	// User Profile Photo
 	if (req?.body?.photo !== "" && req?.body?.photo !== undefined) {
 		// Update new photo
 		const file = req.body.photo;
 
-		// TODO: Check if the user has not changes his photo. If yes not perform these steps
+		// TODO: Check if the user has not changed his photo. If yes not perform these steps
 		// delete previous image from cloudinary
-		if (project?.photo?.public_id) {
-			cloudinary.v2.uploader.destroy(project.photo.public_id);
+		if (room?.photo?.public_id) {
+			cloudinary.v2.uploader.destroy(room.photo.public_id);
 		}
 
 		// add new image
@@ -92,18 +90,18 @@ exports.updateProject = catchAsync(async (req, res, next) => {
 			crop: "scale",
 		});
 
-		newProjectData.photo = {
+		newRoomData.photo = {
 			public_id: result.public_id,
 			url: result.secure_url,
 		};
 	}
 
-	if (req.body.photo === "") delete newProjectData.photo;
+	if (req.body.photo === "") delete newRoomData.photo;
 
-	// 3.Update the project
-	const updatedProject = await Project.findByIdAndUpdate(
+	// 3.Update the room
+	const updatedRoom = await Room.findByIdAndUpdate(
 		req.params.id,
-		newProjectData,
+		newRoomData,
 		{
 			new: true,
 			runValidators: true,
@@ -113,22 +111,22 @@ exports.updateProject = catchAsync(async (req, res, next) => {
 	res.status(200).json({
 		success: true,
 		data: {
-			project: updatedProject,
+			room: updatedRoom,
 		},
 	});
 });
 
-exports.deleteProject = catchAsync(async (req, res, next) => {
-	// 1. Check if the projects exits
-	const project = await Project.findById(req.params.id);
+exports.deleteRoom = catchAsync(async (req, res, next) => {
+	// 1. Check if the room exits
+	const room = await Room.findById(req.params.id);
 
-	if (!project) return next(new AppError("Project not found", 404));
+	if (!room) return next(new AppError("Room not found", 404));
 
 	// 2. Delete photos from cloudinary
-	cloudinary.v2.uploader.destroy(project.photo.public_id);
+	cloudinary.v2.uploader.destroy(room.photo.public_id);
 
-	// 3. Delete Project
-	await Project.findByIdAndDelete(req.params.id);
+	// 3. Delete Room
+	await Room.findByIdAndDelete(req.params.id);
 
 	res.status(202).json({
 		status: "success",
