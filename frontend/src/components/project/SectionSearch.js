@@ -14,45 +14,30 @@ import ratingArray from "../../utils/ratingArray";
 import hobbiesArray from "../../utils/HobbiesArray";
 
 const SearchPanel = () => {
-  const [showOptions, setShowOptions] = useState(false);
+  const [locat, setLocat] = useState([]);
   const [techArray, setTechArray] = useState([]);
-  const [searchTitle, setSearchTitle] = useState("");
+  const [price, setPrice] = useState("");
 
   const dispatch = useDispatch();
 
-  const showFilterBar = () => {
-    setShowOptions((prevState) => !prevState);
-  };
-
-  const onSearchChange = (e) => {
-    setSearchTitle(e.target.value);
-  };
-
-  const addElementToTechArray = (value, type) => {
-    if (techArray.length === 5) return;
-
-    setTechArray((prevElements) => {
-      return [...prevElements, value];
-    });
-  };
-
-  const removeElementFromTechArray = (value, type) => {
-    setTechArray((prevElements) => {
-      return prevElements.filter((el) => {
-        return el !== value;
-      });
-    });
-  };
-
   const handleSumbit = () => {
-    setShowOptions(false);
+    let selectedLocations = locat.map((e) => e.value);
+    let selectedPrice = [];
+
+    if (price) {
+      selectedPrice = price.split("-").map((e) => +e.trim());
+    }
+
+    let body = {};
+
+    if (selectedLocations.length > 0) {
+      body.city = selectedLocations;
+    }
 
     dispatch(
       fetchProjects({
-        page: "1",
-        perPage: "12",
-        keyword: searchTitle,
-        tags: techArray,
+        body,
+        price: selectedPrice,
       })
     );
   };
@@ -82,7 +67,7 @@ const SearchPanel = () => {
               isMulti
               name='location'
               onChange={(e) => {
-                console.log(e);
+                setLocat(e);
               }}
               options={locations}
               className='basic-multi-select'
@@ -95,7 +80,7 @@ const SearchPanel = () => {
             <Select
               name='price'
               onChange={(e) => {
-                console.log(e);
+                setPrice(e.value);
               }}
               options={priceArray}
               className='basic-multi-select'
