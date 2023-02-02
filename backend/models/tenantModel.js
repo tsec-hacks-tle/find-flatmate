@@ -129,6 +129,16 @@ const tenantSchema = mongoose.Schema(
 			type: Number,
 		},
 
+		ratingsAverage: {
+			type: Number,
+			default: 4.5,
+		},
+
+		ratingsQuantity: {
+			type: Number,
+			default: 0,
+		},
+
 		// TODO: habits: [
 		// 	{
 		// 		type: String,
