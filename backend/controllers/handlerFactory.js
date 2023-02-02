@@ -153,7 +153,7 @@ exports.getAll = (Model) =>
     console.log("-->" + req.query);
     let filteredDoc = doc;
 
-    if (doc[0].role == "tenant") {
+    if (doc[0]?.role == "tenant") {
       filteredDoc = doc.filter((obj) => obj._id != req.user.id);
       for (let i = 0; i < filteredDoc.length; i++) {
         let match = 0;
@@ -202,7 +202,7 @@ exports.getAll = (Model) =>
         if (!req.query.state || req.query.state === filteredDoc[i].state) {
           match += 10;
         }
-        if (!req.query.city || req.query.city === filteredDoc[i].city) {
+        if (!req.query.city || req.query.city === filteredDoc[i].city[0]) {
           match += 10;
         }
         if (
@@ -217,8 +217,8 @@ exports.getAll = (Model) =>
         ) {
           match += 15;
         }
-        let priceLB = req.query.price.gte;
-        let priceUB = req.query.price.lte;
+        let priceLB = req.query?.price?.gte;
+        let priceUB = req.query?.price?.lte;
         if (priceLB && priceUB) {
           if (
             filteredDoc[i].price >= priceLB &&

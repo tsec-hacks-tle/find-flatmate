@@ -6,11 +6,13 @@ const state_list = require("../utils/state_list");
 const postalcode_list = require("../utils/pincode_list");
 
 const roomSchema = mongoose.Schema({
-	city: {
-		type: String,
-		enum: city_list,
-		required: [true, "A room must have a city"],
-	},
+	city: [
+		{
+			type: String,
+			enum: city_list,
+			required: [true, "A room must have a city"],
+		},
+	],
 
 	landmark: {
 		type: String,
