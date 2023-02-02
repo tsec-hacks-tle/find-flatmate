@@ -13,6 +13,10 @@ router
 	.route("/:id")
 	.get(protect(FlatOwner), requestController.getRequestsByRoom)
 	.post(protect(Tenant), requestController.addRequest)
-	.delete(protect(FlatOwner, Tenant), requestController.deleteRequests);
+	.delete(protect(FlatOwner, Tenant), requestController.deleteRequest);
+
+router
+	.route("/approve/:id")
+	.patch(protect(FlatOwner), requestController.approveRequest);
 
 module.exports = router;

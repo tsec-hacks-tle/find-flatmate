@@ -9,6 +9,7 @@ const globalErrorHandler = require("./controllers/errorController");
 const tenantRoutes = require("./routes/tenantRoutes");
 const flatOwnerRoutes = require("./routes/flatOwnerRoutes");
 const roomRoutes = require("./routes/roomRoutes");
+const requestRoutes = require("./routes/requestRoutes");
 // const notificationRoutes = require("./routes/notificationRoutes");
 
 const app = express();
@@ -27,6 +28,7 @@ app.use(cookieParser());
 app.use("/api/v1/tenants", tenantRoutes);
 app.use("/api/v1/flatOwners", flatOwnerRoutes);
 app.use("/api/v1/rooms", roomRoutes);
+app.use("/api/v1/requests", requestRoutes);
 // app.use("/api/v1/projects", projectRoutes);
 // app.use("/api/v1/notifications", notificationRoutes);
 

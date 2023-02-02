@@ -51,8 +51,13 @@ const roomSchema = mongoose.Schema({
 		},
 	],
 
+	maxCapacity: {
+		type: Number,
+	},
+
 	capacity: {
 		type: Number,
+		default: 0,
 	},
 
 	tenants: [
@@ -125,5 +130,5 @@ const roomSchema = mongoose.Schema({
 	],
 });
 
-const room = mongoose.model("room", roomSchema);
+const room = mongoose.model("Room", roomSchema);
 module.exports = room;
