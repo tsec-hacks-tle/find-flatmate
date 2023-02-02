@@ -1,0 +1,43 @@
+/***********************/
+/* HEADER */
+/***********************/
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Pacifico&family=Work+Sans:wght@300&display=swap");
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 6rem;
+  padding: 0 3.6rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 1.2rem;
+}
+
+.header a {
+  text-decoration: none;
+  color: #000 !important;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 500;
+  font-family: "Pacifico", cursive;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  letter-spacing: 0.5px;
+}
+
+.nav-right {
+  font-weight: 500;
+}
+
+.underline:hover {
+  text-decoration-line: underline;
+  text-underline-offset: 5px;
+}
