@@ -2,12 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./Projects.module.css";
 
-import ImageHouse from "../../assets/img_house.webp";
+// import ImageHouse from "../../assets/img_house.webp";
 import { Icon, StarIcon } from "@chakra-ui/icons";
 import rightIcon from "../../assets/thumbsUp.svg";
 
 const Project = ({ project }) => {
   const navigate = useNavigate();
+
+  console.log(project.photos);
 
   return (
     <div className={classes["card"]}>
@@ -32,7 +34,7 @@ const Project = ({ project }) => {
       </div>
       <div className={classes["card-image"]}>
         <img
-          src={ImageHouse}
+          src={project?.photos[0]?.url}
           alt='Green double couch with wooden legs'
           borderRadius='lg'
         />

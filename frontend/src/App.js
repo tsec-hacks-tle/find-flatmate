@@ -9,6 +9,8 @@ import Login from "./screens/auth/Login/Login";
 import Profile from "./screens/auth/Profile/Profile";
 import Signup from "./screens/auth/Signup/Signup";
 import MyCollections from "./screens/Collection/MyCollections";
+import CreateRooms from "./screens/flatOwner/Dashboard/CreateRooms";
+import Dashboard from "./screens/flatOwner/Dashboard/Dashboard";
 import HomePage from "./screens/HomePage";
 import JobHunterDetailsPage from "./screens/jobHunter/JobHunterDetailsPage";
 import ResetPasswordJobHunter from "./screens/jobHunter/ResetPasswordJobHunter";
@@ -69,6 +71,20 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path='/profile' element={<Profile />} />
         </Route>
+
+        {user && user.role === "flatowner" && (
+          <>
+            <Route element={<ProtectedRoute />}>
+              <Route path='/owner/dashboard' element={<Dashboard />} />
+            </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path='/owner/createRooms' element={<CreateRooms />} />
+            </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path='/owner/rooms' element={<Dashboard />} />
+            </Route>
+          </>
+        )}
 
         {/* <Route element={<ProtectedRoute />}>
           <Route path='/collections' element={<MyCollections />} />

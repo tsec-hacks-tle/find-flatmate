@@ -12,7 +12,7 @@
   /* margin: 0 auto; */
   /* z-index: 100; */
   /* position: relative; */
-  margin-left: 8%;
+  margin-left: 4%;
 }
 
 .filter-panel {
@@ -196,6 +196,11 @@
   font-size: 500;
   margin-bottom: 2rem;
   text-transform: capitalize;
+}
+
+.card-image img {
+  width: 600px;
+  height: 160px;
 }
 
 .card-footer {
