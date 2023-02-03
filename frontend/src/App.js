@@ -9,6 +9,7 @@ import Login from "./screens/auth/Login/Login";
 import Profile from "./screens/auth/Profile/Profile";
 import Signup from "./screens/auth/Signup/Signup";
 import MyCollections from "./screens/Collection/MyCollections";
+import AllRooms from "./screens/flatOwner/Dashboard/AllRooms";
 import CreateRooms from "./screens/flatOwner/Dashboard/CreateRooms";
 import Dashboard from "./screens/flatOwner/Dashboard/Dashboard";
 import HomePage from "./screens/HomePage";
@@ -81,7 +82,7 @@ function App() {
               <Route path='/owner/createRooms' element={<CreateRooms />} />
             </Route>
             <Route element={<ProtectedRoute />}>
-              <Route path='/owner/rooms' element={<Dashboard />} />
+              <Route path='/owner/rooms' element={<AllRooms />} />
             </Route>
           </>
         )}

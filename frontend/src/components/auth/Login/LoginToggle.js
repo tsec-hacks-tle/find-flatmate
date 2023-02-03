@@ -34,7 +34,7 @@ const LoginToggle = ({ handleRoleChange, role }) => {
         />
         <Tab
           className='recruiter_cta'
-          value='owner'
+          value='flatowner'
           style={{ fontSize: "1.2rem" }}
           label='Login as Room Owner'
         />

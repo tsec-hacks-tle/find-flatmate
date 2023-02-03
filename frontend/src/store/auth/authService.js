@@ -19,9 +19,10 @@ const signup = async (userData) => {
 // Login user
 const login = async (userData) => {
   let role;
+
   if (userData.role === "tenant") role = "tenants";
   if (userData.role === "flatowner") role = "flatowners";
-  const { data } = await axios.post(`${API_URL}${role}/login`, userData);
+  const { data } = await axios.post(`${API_URL}/flatowners/login`, userData);
 
   console.log(data);
 

@@ -6,32 +6,34 @@ import classes from "./Projects.module.css";
 import { Icon, StarIcon } from "@chakra-ui/icons";
 import rightIcon from "../../assets/thumbsUp.svg";
 
-const Project = ({ project }) => {
+const Project = ({ project, removeMatch }) => {
   const navigate = useNavigate();
 
-  console.log(project.photos);
+  console.log(removeMatch);
 
   return (
     <div className={classes["card"]}>
-      <div className={classes["card-match-header"]}>
-        <div className={classes["card-match"]}>
-          <img
-            src={rightIcon}
-            alt='thumbs up'
-            style={{ height: "12px", width: "auto" }}
-          />
-          <span
-            style={{
-              color: "rgb(46, 201, 113)",
-              marginLeft: "5px",
-              marginRight: "5px",
-              fontWeight: "bold",
-            }}>
-            {project.match}%
-          </span>
-          Match
+      {removeMatch && (
+        <div className={classes["card-match-header"]}>
+          <div className={classes["card-match"]}>
+            <img
+              src={rightIcon}
+              alt='thumbs up'
+              style={{ height: "12px", width: "auto" }}
+            />
+            <span
+              style={{
+                color: "rgb(46, 201, 113)",
+                marginLeft: "5px",
+                marginRight: "5px",
+                fontWeight: "bold",
+              }}>
+              {project.match}%
+            </span>
+            Match
+          </div>
         </div>
-      </div>
+      )}
       <div className={classes["card-image"]}>
         <img
           src={project?.photos[0]?.url}
@@ -67,13 +69,6 @@ const Project = ({ project }) => {
         </div>
       </div>
     </div>
-
-    // <div
-    //   className={classes["project"]}
-    //   onClick={() => navigate(`/project/${project._id}`)}>
-    //   <img src={project.photo.url} alt={project.title} />
-    //   <p>{project.title}</p>
-    // </div>
   );
 };
 

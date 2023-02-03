@@ -35,14 +35,14 @@ const SignupTabs = () => {
               <Tab
                 label='Signup as Room Owner'
                 style={{ fontSize: "1.2rem" }}
-                value='owner'
+                value='flatowner'
               />
             </TabList>
           </Box>
           <TabPanel value='tenant' style={{ width: "100%", padding: 0 }}>
             <JobHunterSignupForm />
           </TabPanel>
-          <TabPanel value='owner' style={{ width: "100%", padding: 0 }}>
+          <TabPanel value='flatowner' style={{ width: "100%", padding: 0 }}>
             <RecruiterSignupForm />
           </TabPanel>
         </TabContext>

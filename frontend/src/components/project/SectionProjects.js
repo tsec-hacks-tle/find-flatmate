@@ -20,7 +20,7 @@ const SectionProjects = () => {
             <p className='not-found grid-span'>Couldn't find any rooms.</p>
           ) : (
             projects.map((project) => (
-              <Project key={project._id} project={project} />
+              <Project key={project._id} project={project} removeMatch={true} />
             ))
           )}
         </ChakraProvider>

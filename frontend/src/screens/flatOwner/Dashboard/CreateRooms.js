@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import locations from "../../../utils/LocationArray";
 import religionArray from "../../../utils/ReligionArray";
@@ -19,6 +20,7 @@ const CreateRooms = () => {
   const [capacity, setCapacity] = useState("");
   const [religion, setReligion] = useState("");
   const [price, setPrice] = useState("");
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     const files = Array.from(e.target.files);
@@ -72,8 +74,10 @@ const CreateRooms = () => {
         },
       };
 
-      const data = await axios.post("/api/v1/rooms/add", formData, config);
-      console.log(data);
+      const { data } = await axios.post("/api/v1/rooms/add", formData, config);
+      if (data.status) {
+        navigate("/owner/rooms");
+      }
     } catch (err) {
       console.log(err);
     }
